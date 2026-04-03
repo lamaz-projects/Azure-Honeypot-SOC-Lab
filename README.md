@@ -1,2 +1,2 @@
 # Azure-Honeypot-SOC-Lab
-Building a SOC lab in Azure using a honeypot and SIEM monitoring
+A cloud-based SOC Honeypot project using Microsoft Sentinel to map global RDP brute-force attacks in real-time.
