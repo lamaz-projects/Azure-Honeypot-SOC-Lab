@@ -1,1 +1,9 @@
-
+// Join the SecurityEvent logs with the GeoIP Watchlist 
+// to map attacker IPs to Latitude and Longitude
+let geoip_watchlist = _GetWatchlist('geoip');
+SecurityEvent
+| where EventID == 4625
+| extend AttackerIP = IpAddress
+| join kind=leftouter (geoip_watchlist) on $left.AttackerIP == $right.Network
+| summarize EventCount = count() by AttackerIP, Latitude, Longitude, City = cityname, Country = countryname
+| project AttackerIP, Latitude, Longitude, EventCount, City, Country
